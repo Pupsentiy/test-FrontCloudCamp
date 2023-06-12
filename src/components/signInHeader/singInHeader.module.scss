@@ -1,0 +1,52 @@
+.signInHeader_header_wrapper {
+  padding: 0 0 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  .signInHeader_wrapper_avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    background: #d5e4f7;
+    font-size: 40px;
+    line-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .signInHeader_owner_info {
+    margin-left: 24px;
+    .signInHeader_owner__name {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    .signInHeader_contacts_list {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 8px;
+      .signInHeader_contacts_item {
+        margin-right: 16px;
+        &:last-child {
+          margin-right: 0;
+        }
+        .signInHeader_contacts__link {
+          font-size: 12px;
+          line-height: 16px;
+          color: #5558fa;
+          display: flex;
+          align-items: center;
+
+          &:hover {
+            color: #333333;
+          }
+          img {
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+  }
+}

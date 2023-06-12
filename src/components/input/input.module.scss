@@ -1,0 +1,14 @@
+.input__conteiner {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  width: autoI;
+  .input_error {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    color: #eb1717;
+    margin-top: 8px;
+  }
+}
