@@ -18,8 +18,53 @@
       margin-left: 16px;
     }
   }
-  .button__add_advantages{
+  .button__add_advantages {
     margin-top: 8px;
+  }
+
+  .checkbox_group {
+    margin-top: 24px;
+    .wrapper_checkbox {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .wrapper_about {
+    margin-top: 66px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .textarea {
+      margin-top: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      border-radius: 4px;
+      min-height: 84px;
+      width: 100%;
+      padding: 12px;
+      position: relative;
+    }
+
+    .textarea_other {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      .counter_textarea {
+        margin-left: auto;
+      }
+      .textarea__error{
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        color: #eb1717;
+      }
+    }
   }
 
   .signInForm__input {

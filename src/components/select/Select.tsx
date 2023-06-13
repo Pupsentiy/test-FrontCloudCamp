@@ -16,7 +16,7 @@ const Select: React.FC = () => {
   const selectRef = React.useRef<HTMLDivElement>(null);
   const selected = useAppSelector((state) => state.otherReducer.selected);
 
-  const selectSort = (obj: TSelectOption) => {
+  const selectSex = (obj: TSelectOption) => {
     dispatch(setChangeSeleсion(obj.title));
     setOpen(false);
   };
@@ -30,6 +30,7 @@ const Select: React.FC = () => {
     document.body.addEventListener("click", handleClickOutside);
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
+
   return (
     <>
       <div className={styles.select_title}>Sex</div>
@@ -58,7 +59,7 @@ const Select: React.FC = () => {
               <li
                 className={styles.select_list__item}
                 key={i}
-                onClick={() => selectSort(obj)}
+                onClick={() => selectSex(obj)}
               >
                 {obj.title}
               </li>

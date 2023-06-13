@@ -28,12 +28,20 @@ export const nickNameShema = yup
   .matches(NICKNAME_REGEXP, "Могут быть просто буквы и цифры")
   .max(30, "Не более 30 символов")
   .required("Заполните поле");
+export const aboutShema = yup
+  .string()
+  .max(200, "Не более 200 символов")
+  .required("Заполните поле");
 
 export const signInSchema = yup.object().shape({
   email: emeilSchema,
   phoneNumber: telShema,
+});
+
+export const infoAboutMeFormShema = yup.object().shape({
   nickname: nickNameShema,
   name: nameShema,
-  sername:nameShema,
-  advantages:nameShema
+  sername: nameShema,
+  advantages: nameShema,
+  about: aboutShema,
 });

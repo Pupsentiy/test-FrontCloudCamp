@@ -10,7 +10,7 @@ import Input from "../input/Input";
 import styles from "./signInForm.module.scss";
 import Button from "../button/Button";
 import { routesConfig } from "../../routes/routesConfig";
-import { signInSchema } from "../../core/helpers/validation,helpers";
+import { signInSchema } from "../../core/helpers/validation.helpers";
 import SignInHeader from "../signInHeader/SignInHeader";
 
 export interface ISignInForm {
@@ -35,8 +35,9 @@ const SignInForm: FC = forwardRef(() => {
     const phoneNumber = data?.phoneNumber?.replace(/[^0-9]/g, "");
     const newData = { ...data, phoneNumber }
     // reset();
-
-    navigate(routesConfig.create.path, { replace: true });
+    console.log(errors)
+    console.log(data)
+    navigate(routesConfig.create.path);
   };
   return (
     <div className={styles.signInForm_wrapper}>

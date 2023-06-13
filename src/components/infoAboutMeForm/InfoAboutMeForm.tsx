@@ -10,7 +10,7 @@ import {
   SubmitHandler,
 } from "react-hook-form";
 
-import { signInSchema } from "../../core/helpers/validation,helpers";
+import { infoAboutMeFormShema, signInSchema } from "../../core/helpers/validation.helpers";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import styles from "./infoAboutMeForm.module.scss";
@@ -29,6 +29,7 @@ export type TInfoAboutMeForm = {
   name: string;
   sername: string;
   advantages:string
+  about:string
 };
 
 export type TStepsProps = {
@@ -48,7 +49,7 @@ const InfoAboutMeForm: FC = () => {
     formState: { errors },
     reset,
   } = useForm<TInfoAboutMeForm>({
-    resolver: yupResolver(signInSchema),
+    resolver: yupResolver(infoAboutMeFormShema),
     mode: "onChange",
   });
 
@@ -65,11 +66,12 @@ const InfoAboutMeForm: FC = () => {
       navigate(-1);
     }
   };
-  console.log(step);
 
   const submit: SubmitHandler<TInfoAboutMeForm> = (data: any, e) => {
     e?.preventDefault();
     console.log(data)
+    console.log(e)
+    console.log(errors)
   };
 
   const steps = [

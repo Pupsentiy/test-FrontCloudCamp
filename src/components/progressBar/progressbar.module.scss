@@ -1,0 +1,61 @@
+.progressBar_wrapper {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #5558fa;
+    height: 8px;
+    border-radius: 8px;
+    z-index: 5;
+  }
+  .progressBar__fillBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .progressBar_dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 100px;
+      background: #a6a6a6;
+      z-index: 10;
+    }
+    .progressBar_dot__active {
+      background: #5558fa;
+    }
+  }
+}
+
+.progressBar_wrapper_steps_two {
+  &::before {
+    width: 50%;
+  }
+}
+.progressBar_wrapper_steps_three {
+  &::before {
+    width: 100%;
+  }
+}
+
+.progressBar_nums {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+
+  .progressBar__num {
+    color: #666666;
+  }
+  .progressBar__num_active {
+    color: #5558fa;
+  }
+}

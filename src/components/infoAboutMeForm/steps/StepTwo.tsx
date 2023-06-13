@@ -14,6 +14,8 @@ import del from "../../../assets/img//Delete.svg";
 import styles from "../infoAboutMeForm.module.scss";
 import Button from "../../button/Button";
 import { setAddAdvantages, setDeleteAdvantages } from "../../../store/actions";
+import { numbers } from "../../../core/constants/constants";
+import { TCheckbox } from "../../../store/types/store.types";
 
 let id = 1;
 
@@ -37,14 +39,14 @@ const StepTwo: FC<TStepsProps> = ({ control, register, errors }) => {
     <>
       <p className={styles.title__advantages}>Advantages</p>
       {advantages &&
-        advantages.map((advan: any, i: number) => (
+        advantages.map((advan: string, i: number) => (
           <div className={styles.wrapper_advantages} key={i}>
             <Controller
               control={control}
               rules={{
                 required: true,
               }}
-              name={advan}
+              name={`advantages`}
               defaultValue=""
               render={({ field: { onChange, value, ref } }) => (
                 <Input
@@ -54,7 +56,7 @@ const StepTwo: FC<TStepsProps> = ({ control, register, errors }) => {
                   {...register}
                   onChange={onChange}
                   value={value}
-                  error={errors.nickname?.message}
+                  error={errors.name?.message}
                   inputRef={ref}
                 />
               )}
@@ -76,6 +78,27 @@ const StepTwo: FC<TStepsProps> = ({ control, register, errors }) => {
       >
         <img src={plus} alt="add input advantages" />
       </Button>
+
+      <div className={styles.checkbox_group}>
+        <p>Checkbox group</p>
+        {numbers &&
+          numbers.map((checkbox: TCheckbox, i: number) => (
+            <div className={styles.wrapper_checkbox} key={i}>
+              <Input type={"checkbox"} classInput={""} />
+              <p>{checkbox.num}</p>
+            </div>
+          ))}
+      </div>
+      <div className={styles.checkbox_group}>
+        <p>Radio group</p>
+        {numbers &&
+          numbers.map((checkbox: TCheckbox, i: number) => (
+            <div className={styles.wrapper_checkbox} key={i}>
+              <Input type={"radio"} classInput={""} />
+              <p>{checkbox.num}</p>
+            </div>
+          ))}
+      </div>
     </>
   );
 };
