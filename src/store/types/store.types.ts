@@ -1,3 +1,5 @@
+import { Name } from "../../components/infoAboutMeForm/InfoAboutMeForm";
+
 export enum ActionTypes {
   CHANGE_SELECT = "CHANGE_SELECT",
   CHANGE_STEP = "CHANGE_STEP",
@@ -25,22 +27,28 @@ export type TDeleteAdvantagesAction = {
 };
 
 export type TInitialStateFormReducer = {
-  phoneNumber: string;
-  email: string;
+  form:TForm
+}
+
+export type TForm = {
   nickname: string;
   name: string;
   sername: string;
   sex: string;
-  advantages: string[];
-  radio: number;
-  checkbox: TCheckbox[];
+  advantages: Array<Name>;
+  radioGroup: number;
+  checkbox: number[];
   about: string;
 };
 
-export type TCheckbox = {
-  id: number;
-  num: number;
-};
+export type TAdvantages = {
+  advantages:string
+}
+
+// export type TCheckbox = {
+//   id: number;
+//   num: number;
+// };
 
 export type TInitialStateOtherReducer = {
   selected: string;

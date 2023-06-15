@@ -5,11 +5,18 @@ export type TButtonProps = {
   type: "button" | "submit" | "reset";
   classProps: string;
   onClick?: ((e: React.MouseEvent<HTMLButtonElement>) => void) | undefined;
+  disabled?: boolean;
 };
 
-const Button: FC<TButtonProps> = ({ children, type, classProps, onClick }) => {
+const Button: FC<TButtonProps> = ({
+  children,
+  type,
+  classProps,
+  onClick,
+  disabled,
+}) => {
   return (
-    <button className={classProps} type={type} onClick={onClick}>
+    <button className={classProps} type={type} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

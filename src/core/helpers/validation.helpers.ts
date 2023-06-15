@@ -33,6 +33,11 @@ export const aboutShema = yup
   .max(200, "Не более 200 символов")
   .required("Заполните поле");
 
+export const advantagesShema = yup
+  .array()
+  .of(yup.object({ advantages: yup.string().matches(NAME_REGEXP,'только из буквы') }))
+  .required("Заполните поле");
+
 export const signInSchema = yup.object().shape({
   email: emeilSchema,
   phoneNumber: telShema,
@@ -42,6 +47,6 @@ export const infoAboutMeFormShema = yup.object().shape({
   nickname: nickNameShema,
   name: nameShema,
   sername: nameShema,
-  advantages: nameShema,
+  advantages: advantagesShema,
   about: aboutShema,
 });

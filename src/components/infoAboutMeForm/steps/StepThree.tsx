@@ -6,6 +6,9 @@ import { TStepsProps } from "../InfoAboutMeForm";
 import styles from "../infoAboutMeForm.module.scss";
 
 const StepThree: FC<TStepsProps> = ({ control, register, errors }) => {
+
+
+
   return (
     <div className={styles.wrapper_about}>
       <Controller
@@ -14,6 +17,8 @@ const StepThree: FC<TStepsProps> = ({ control, register, errors }) => {
           required: true,
         }}
         name={`about`}
+
+        
         defaultValue=""
         render={({ field: { onChange, value, ref } }) => (
           <>
@@ -29,6 +34,7 @@ const StepThree: FC<TStepsProps> = ({ control, register, errors }) => {
               onChange={onChange}
               value={value}
               // inputRef={ref}
+              
             ></textarea>
             <div className={styles.textarea_other}>
               <small className={styles.textarea__error}>

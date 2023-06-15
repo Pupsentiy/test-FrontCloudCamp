@@ -9,7 +9,9 @@ export type TInputProps = {
   type: string;
   name?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  value?: string | number;
+  checked?:boolean
+  defaultValue?:string
   placeholder?: string;
   classInput: string;
   classLabel?: string;
@@ -29,10 +31,13 @@ const Input: FC<TInputProps> = ({
   name,
   onChange,
   value,
+  checked,
+  defaultValue,
   classInput,
   classLabel,
   placeholder,
   register,
+  inputRef
 }) => {
   return (
     <div className={styles.input__conteiner}>
@@ -48,6 +53,9 @@ const Input: FC<TInputProps> = ({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        checked={checked}
+        defaultValue={defaultValue}
+        ref={inputRef}
       />
       {error !== undefined && <small className={styles.input_error}>{error}</small>}
     </div>

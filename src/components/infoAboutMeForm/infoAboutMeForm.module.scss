@@ -12,10 +12,11 @@
 
   .wrapper_advantages {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 8px;
     .advatages__btn_delete {
       margin-left: 16px;
+      margin-top: 12px;
     }
   }
   .button__add_advantages {
@@ -58,7 +59,7 @@
       .counter_textarea {
         margin-left: auto;
       }
-      .textarea__error{
+      .textarea__error {
         font-weight: 300;
         font-size: 12px;
         line-height: 14px;
