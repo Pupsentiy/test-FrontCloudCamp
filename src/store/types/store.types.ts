@@ -1,10 +1,10 @@
-import { Name } from "../../components/infoAboutMeForm/InfoAboutMeForm";
-
 export enum ActionTypes {
   CHANGE_SELECT = "CHANGE_SELECT",
   CHANGE_STEP = "CHANGE_STEP",
-  ADD_ADVANTAGES = "ADD_ADVANTAGES",
-  DELETE_ADVANTAGES = "DELETE_ADVANTAGES",
+  CLOSE_MODAL = "CLOSE_MODAL",
+  FETCH_DATA = "FETCH_DATA",
+  FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS",
+  FETCH_DATA_ERROR = "FETCH_DATA_ERROR",
 }
 
 export type TSelectAction = {
@@ -26,34 +26,48 @@ export type TDeleteAdvantagesAction = {
   payload: string;
 };
 
-export type TInitialStateFormReducer = {
-  form:TForm
+export interface IFetchDataErrorAction {
+  type: ActionTypes.FETCH_DATA_ERROR;
 }
+export interface IFetchDataAction {
+  type: ActionTypes.FETCH_DATA;
+}
+
+export interface IFetchDataSuccessAction {
+  type: ActionTypes.FETCH_DATA_SUCCESS;
+}
+
+export type TCloseModal = {
+  type: ActionTypes.CLOSE_MODAL;
+};
 
 export type TForm = {
   nickname: string;
   name: string;
   sername: string;
   sex: string;
-  advantages: Array<Name>;
+  advantages: string[];
   radioGroup: number;
   checkbox: number[];
   about: string;
 };
 
 export type TAdvantages = {
-  advantages:string
-}
-
-// export type TCheckbox = {
-//   id: number;
-//   num: number;
-// };
+  advantages: string;
+};
 
 export type TInitialStateOtherReducer = {
   selected: string;
   stepForm: number;
+  isLoading: boolean;
+  isSuccess: boolean;
+  modalOpen: boolean;
 };
 
-export type TOtherTypeAction = TSelectAction | TStepAction;
-export type TFormTypeAction = TAddAdvantagesAction | TDeleteAdvantagesAction;
+export type TOtherTypeAction =
+  | TSelectAction
+  | TStepAction
+  | IFetchDataErrorAction
+  | IFetchDataAction
+  | IFetchDataSuccessAction
+  | TCloseModal;

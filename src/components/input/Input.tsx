@@ -7,7 +7,8 @@ export type TInputProps = {
   htmlFor?: string;
   error?: string;
   type: string;
-  name?: string;
+  name?: string
+  id?:string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | number;
   checked?:boolean
@@ -29,6 +30,7 @@ const Input: FC<TInputProps> = ({
   error,
   type,
   name,
+  id,
   onChange,
   value,
   checked,
@@ -48,7 +50,7 @@ const Input: FC<TInputProps> = ({
         type={type}
         name={name}
         className={classInput}
-        id={htmlFor}
+        id={id}
         {...register}
         placeholder={placeholder}
         onChange={onChange}

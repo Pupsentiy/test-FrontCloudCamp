@@ -2,7 +2,7 @@ import { TNubmer, TLink, TSelectOption } from "./constants.types";
 
 export const EMAIL_REGEXP: RegExp =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-export const PHONE_REGEXP: RegExp = /\+7\s?\(?\d\d\d\)?\s?\d\d\d\-\d\d\-\d\d/;
+export const PHONE_REGEXP: RegExp = /^((|\+7|)[\- ]?)?\(?\d{3,5}\)?[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}(([\- ]?\d{1})?[\- ]?\d{1})?$/;
 export const NAME_REGEXP: RegExp = /^([а-яё\s]+|[a-z\s]+)$/iu;
 export const NICKNAME_REGEXP: RegExp = /^[а-яА-ЯёЁa-zA-Z0-9]+$/;
 
@@ -26,3 +26,5 @@ export const numbers: TNubmer[] = [
   { id: 1, num: 2 },
   { id: 2, num: 3 },
 ];
+
+export const BASE_URL:string = 'https://api.sbercloud.ru'

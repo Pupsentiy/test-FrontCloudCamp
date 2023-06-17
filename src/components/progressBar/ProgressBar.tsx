@@ -6,9 +6,10 @@ import { useAppSelector } from "../../hooks/hooks";
 import dot from "../../assets/img/Dot Small.svg";
 import check from "../../assets/img/Check Small.svg";
 
-import styles from "./progressbar.module.scss";
 import { TNubmer } from "../../core/constants/constants.types";
 import { numbers } from "../../core/constants/constants";
+
+import styles from "./progressbar.module.scss";
 
 const ProgressBar: FC = () => {
   const stepForm = useAppSelector((state) => state.otherReducer.stepForm);
@@ -37,7 +38,10 @@ const ProgressBar: FC = () => {
               stepForm === 2 && styles.progressBar_dot__active
             )}
           >
-            <img src={stepForm  === 1  ? dot : stepForm === 2 ? check : ""} alt="" />
+            <img
+              src={stepForm === 1 ? dot : stepForm === 2 ? check : ""}
+              alt=""
+            />
           </span>
           <span
             className={classNames(
@@ -45,14 +49,21 @@ const ProgressBar: FC = () => {
               stepForm === 2 && styles.progressBar_dot__active
             )}
           >
-            <img src={stepForm === 2 ? dot : ''} alt="" />
+            <img src={stepForm === 2 ? dot : ""} alt="" />
           </span>
         </div>
       </div>
       <div className={styles.progressBar_nums}>
         {numbers &&
           numbers.map((item: TNubmer, i: number) => (
-            <span className={classNames(stepForm + 1 >= item.num ? styles.progressBar__num_active : styles.progressBar__num)} key={i}>
+            <span
+              className={classNames(
+                stepForm + 1 >= item.num
+                  ? styles.progressBar__num_active
+                  : styles.progressBar__num
+              )}
+              key={i}
+            >
               {item.num}
             </span>
           ))}

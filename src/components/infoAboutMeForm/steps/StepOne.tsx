@@ -1,14 +1,19 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { Controller } from "react-hook-form";
 
 import Input from "../../input/Input";
 import Select from "../../select/Select";
 
-import { TStepsProps } from "../InfoAboutMeForm";
+import { TStepsProps } from "../InfoAboutMeForm.types";
 
 import styles from "../infoAboutMeForm.module.scss";
 
-const StepOne: FC<TStepsProps> = ({ control, register, errors }) => {
+const StepOne: FC<TStepsProps> = ({
+  control,
+  register,
+  errors,
+  checkedSelect,
+}) => {
   return (
     <>
       <Controller
@@ -78,7 +83,12 @@ const StepOne: FC<TStepsProps> = ({ control, register, errors }) => {
         )}
       />
 
-      <Select />
+      <Fragment>
+        <Select />
+        {!checkedSelect && (
+          <small className="input_error">Обязательное поле</small>
+        )}
+      </Fragment>
     </>
   );
 };

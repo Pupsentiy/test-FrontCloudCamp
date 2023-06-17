@@ -1,14 +1,11 @@
 import { FC } from "react";
 import { Controller } from "react-hook-form";
 
-import { TStepsProps } from "../InfoAboutMeForm";
+import { TStepsProps } from "../InfoAboutMeForm.types";
 
 import styles from "../infoAboutMeForm.module.scss";
 
 const StepThree: FC<TStepsProps> = ({ control, register, errors }) => {
-
-
-
   return (
     <div className={styles.wrapper_about}>
       <Controller
@@ -17,8 +14,6 @@ const StepThree: FC<TStepsProps> = ({ control, register, errors }) => {
           required: true,
         }}
         name={`about`}
-
-        
         defaultValue=""
         render={({ field: { onChange, value, ref } }) => (
           <>
@@ -28,20 +23,17 @@ const StepThree: FC<TStepsProps> = ({ control, register, errors }) => {
             <textarea
               className={styles.textarea}
               id="about"
-              // type={"text"}
               placeholder={"about"}
               {...register}
               onChange={onChange}
               value={value}
-              // inputRef={ref}
-              
             ></textarea>
             <div className={styles.textarea_other}>
               <small className={styles.textarea__error}>
                 {errors.about?.message}
               </small>
               <small className={styles.counter_textarea}>
-                {value.replace(/ /g, '').length}
+                {value.replace(/ /g, "").length} - Счетчик символов без пробелов
               </small>
             </div>
           </>

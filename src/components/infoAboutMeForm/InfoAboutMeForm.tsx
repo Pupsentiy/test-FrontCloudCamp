@@ -1,114 +1,124 @@
-import { FC, FormEvent } from "react";
+import { FC,  useEffect, useState } from "react";
 import classNames from "classnames";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   useForm,
-  Controller,
-  Control,
-  FieldErrors,
-  UseFormRegister,
   SubmitHandler,
 } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import {
   infoAboutMeFormShema,
-  signInSchema,
 } from "../../core/helpers/validation.helpers";
+import { TInfoAboutMeForm } from "./InfoAboutMeForm.types";
+
 import Button from "../button/Button";
-import Input from "../input/Input";
-import styles from "./infoAboutMeForm.module.scss";
 import StepOne from "./steps/StepOne";
-import ProgressBar from "../progressBar/ProgressBar";
 import StepTwo from "./steps/StepTwo";
 import StepThree from "./steps/StepThree";
+
+import ProgressBar from "../progressBar/ProgressBar";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setChangeStep } from "../../store/actions";
-import { useNavigate } from "react-router-dom";
-import { routesConfig } from "../../routes/routesConfig";
-import { ISignInForm } from "../signInForm/SignInForm";
-import {
-  TForm,
-  TInitialStateFormReducer,
-} from "../../store/types/store.types";
+import { myThunkActionCreator, setChangeStep } from "../../store/actions";
+import { TForm } from "../../store/types/store.types";
 
-export type Name = {
-  value: string;
-};
-
-// export type TInfoAboutMeForm = {
-//   nickname: string;
-//   name: string;
-//   sername: string;
-//   advantages: Array<Name>;
-//   about: string;
-//   radioGroup: number;
-//   checkbox: TCheckbox[];
-// };
-
-export type TStepsProps = {
-  control: Control<TForm, string>;
-  register: UseFormRegister<TForm>;
-  errors: FieldErrors<TForm>;
-  setValue?: any;
-  watch?: any;
-};
+import styles from "./infoAboutMeForm.module.scss";
 
 const InfoAboutMeForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const step = useAppSelector((state) => state.otherReducer.stepForm);
-  const form = useAppSelector((state) => state.formReducer.form);
-
+  const { stepForm, selected } = useAppSelector((state) => state.otherReducer);
+  const [checkedSelect, setCheckedSelect] = useState(true);
   const {
     register,
     handleSubmit,
     control,
     setValue,
-    watch,
+    trigger,
     formState: { errors },
-    reset,
-  } = useForm<TForm>({
+  } = useForm<TInfoAboutMeForm>({
     resolver: yupResolver(infoAboutMeFormShema),
     mode: "onChange",
-    defaultValues: { ...form },
+    defaultValues: {
+      advantages: [{ value: "" }, { value: "" }, { value: "" }],
+      checkbox: [] as number[],
+    },
   });
 
-  const changeStepNext = () => {
-    if (step === 2) {
+  const checkErrorCustomSelect = () => {
+    if (selected === "Не выбрано") {
+      setCheckedSelect(false);
+    } else {
+      setCheckedSelect(true);
+    }
+  };
+
+  const changeStepNext = async () => {
+    if (stepForm === 2) {
       return;
     }
-    dispatch(setChangeStep(step + 1));
+    let res;
+    switch (stepForm) {
+      case 0:
+        res = await trigger(["nickname", "name", "sername"]);
+        checkErrorCustomSelect();
+        break;
+      case 1:
+        res = await trigger([`advantages`, "checkbox", "radioGroup"]);
+        break;
+
+      default:
+        break;
+    }
+    if (res) {
+      dispatch(setChangeStep(stepForm + 1));
+    }
   };
 
   const changeStepPrev = () => {
-    if (step !== 0) {
-      dispatch(setChangeStep(step - 1));
+    if (stepForm !== 0) {
+      dispatch(setChangeStep(stepForm - 1));
     } else {
       navigate(-1);
     }
   };
 
-  const submit: SubmitHandler<TForm> = (data: any, e) => {
+  useEffect(() => {
+    setCheckedSelect(true);
+  }, [selected]);
+
+  const submit: SubmitHandler<TInfoAboutMeForm> = (data, e) => {
     e?.preventDefault();
-    console.log(data);
-    console.log(errors);
+    const newData: TForm = JSON.parse(JSON.stringify(data));
+    const advanString: string[] = [...data.advantages].map(
+      (item) => item.value
+    );
+    Object.defineProperty(newData, "advantages", {
+      value: advanString,
+    });
+
+    dispatch(myThunkActionCreator(newData));
   };
 
   const steps = [
-    <StepOne control={control} register={register} errors={errors} />,
+    <StepOne
+      control={control}
+      register={register}
+      errors={errors}
+      checkedSelect={checkedSelect}
+    />,
     <StepTwo
       control={control}
       register={register}
       errors={errors}
       setValue={setValue}
-      watch={watch}
     />,
     <StepThree control={control} register={register} errors={errors} />,
   ];
   return (
     <div className={styles.infoAboutMeForm_wrapper}>
       <ProgressBar />
-      <form>{steps[step]}</form>
+      <form>{steps[stepForm]}</form>
       <div className={styles.infoAboutMeForm_wrapper_nav}>
         <Button
           type="button"
@@ -117,7 +127,7 @@ const InfoAboutMeForm: FC = () => {
         >
           Назад
         </Button>
-        {step === 2 ? (
+        {stepForm === 2 ? (
           <Button
             type="submit"
             onClick={handleSubmit(submit)}

@@ -1,11 +1,21 @@
 .infoAboutMeForm_wrapper {
   background-color: #ffffff;
   border-radius: 24px;
-  width: 900px;
+  max-width: 900px;
+  width: 100%;
   min-height: 400px;
   margin: 24px auto 0;
-  padding: 66px 110px 80px;
-
+  padding: 66px 110px;
+  @media (max-width: 992px) {
+    max-width: 90%;
+  }
+  @media (max-width: 768px) {
+    padding: 50px 30px 30px;
+  }
+  @media (max-width: 576px) {
+    padding: 35px 25px 25px;
+    margin: 24px auto 24px;
+  }
   .title__advantages {
     margin-top: 24px;
   }
@@ -21,6 +31,9 @@
   }
   .button__add_advantages {
     margin-top: 8px;
+    &:hover {
+      background-color: #fff;
+    }
   }
 
   .checkbox_group {
@@ -56,6 +69,9 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      @media (max-width: 576px) {
+        flex-direction: column;
+      }
       .counter_textarea {
         margin-left: auto;
       }
@@ -64,6 +80,10 @@
         font-size: 12px;
         line-height: 14px;
         color: #eb1717;
+        margin-top: 5px;
+        @media (max-width: 576px) {
+          margin-right: auto;
+        }
       }
     }
   }
@@ -73,7 +93,31 @@
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.16);
     border-radius: 4px;
+    max-width: 300px;
+    width: 100%;
+    &:focus {
+      box-shadow: 0px 0px 4px 0px #5558fa;
+    }
+  }
+
+  .signInForm__input_advantages {
+    padding: 12px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
     width: 300px;
+    @media (max-width: 576px) {
+      flex-direction: column;
+      width: 250px;
+    }
+
+    @media (max-width: 375px) {
+      flex-direction: column;
+      width: 200px;
+    }
+    &:focus {
+      box-shadow: 0px 0px 4px 0px #5558fa;
+    }
   }
 
   .signInForm__label {

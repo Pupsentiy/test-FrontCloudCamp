@@ -6,17 +6,14 @@ import { PatternFormat } from "react-number-format";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Input from "../input/Input";
-
-import styles from "./signInForm.module.scss";
 import Button from "../button/Button";
-import { routesConfig } from "../../routes/routesConfig";
-import { signInSchema } from "../../core/helpers/validation.helpers";
 import SignInHeader from "../signInHeader/SignInHeader";
 
-export interface ISignInForm {
-  phoneNumber: string;
-  email: string;
-}
+import { routesConfig } from "../../routes/routesConfig";
+import { signInSchema } from "../../core/helpers/validation.helpers";
+import { ISignInForm } from "./signInForm.types";
+
+import styles from "./signInForm.module.scss";
 
 const SignInForm: FC = forwardRef(() => {
   const navigate = useNavigate();
@@ -25,18 +22,16 @@ const SignInForm: FC = forwardRef(() => {
     handleSubmit,
     control,
     formState: { errors },
-    reset,
   } = useForm<ISignInForm>({
     resolver: yupResolver(signInSchema),
     mode: "onSubmit",
+    defaultValues: {
+      phoneNumber: "9643292129",
+      email: "pupsentiy@gmail.com",
+    },
   });
-  const onSubmit: SubmitHandler<ISignInForm> = (data, e) => {
+  const onSubmit: SubmitHandler<ISignInForm> = (_data, e) => {
     e?.preventDefault();
-    const phoneNumber = data?.phoneNumber?.replace(/[^0-9]/g, "");
-    const newData = { ...data, phoneNumber }
-    // reset();
-    console.log(errors)
-    console.log(data)
     navigate(routesConfig.create.path);
   };
   return (
@@ -51,14 +46,13 @@ const SignInForm: FC = forwardRef(() => {
             control={control}
             rules={{
               required: true,
-              
             }}
             name="phoneNumber"
             defaultValue=""
             render={({ field: { onChange, value, ref } }) => (
               <PatternFormat
-                format={"+7 (###)###-##-##"}
-                mask={' '}
+                format={"+7(###)###-##-##"}
+                mask={" "}
                 classInput={styles.signInForm__input}
                 classLabel={styles.signInForm__label}
                 htmlFor="Номер телефона"
@@ -98,10 +92,7 @@ const SignInForm: FC = forwardRef(() => {
 
           <Button
             type="submit"
-            classProps={classNames(
-              styles.signInForm_submit,
-              "button_primary"
-            )}
+            classProps={classNames(styles.signInForm_submit, "button_primary")}
           >
             Начать
           </Button>

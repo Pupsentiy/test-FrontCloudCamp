@@ -5,6 +5,9 @@
   min-height: 700px;
   margin: 24px auto 0;
   padding: 24px;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 
   .signInForm_content {
     .signInForm_login {
@@ -13,7 +16,8 @@
         background-color: rgba(0, 0, 0, 0.04);
         border: 1px solid rgba(0, 0, 0, 0.16);
         border-radius: 4px;
-        width: 400px;
+        max-width: 400px;
+        width: 100%;
 
         &:focus {
           background-color: #fff;

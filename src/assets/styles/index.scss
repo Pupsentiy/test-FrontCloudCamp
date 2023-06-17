@@ -10,7 +10,7 @@ html {
 body {
   margin: 0px;
   padding: 0px;
-  height: 100%;
+  height: auto;
   background-color: #f4f4f5;
 
   font-family: "Open Sans", sans-serif;
@@ -19,11 +19,17 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
+  @media (max-width: 576px) {
+    height: 100%;
+  }
 }
 
 .main-container {
   max-width: $content-width;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: $breakpoint_xl) {
     max-width: 1140px;
@@ -67,4 +73,13 @@ body {
     background-color: #5558fa;
     border: 1.5px solid #5558fa;
   }
+}
+
+.input_error {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+  color: #eb1717;
+  margin-top: 8px;
 }

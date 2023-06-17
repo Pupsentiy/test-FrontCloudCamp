@@ -1,52 +1,25 @@
-import { FC, forwardRef, useState } from "react";
+import { FC } from "react";
 import { Controller, useFieldArray } from "react-hook-form";
 import classNames from "classnames";
 
 import Input from "../../input/Input";
+import Button from "../../button/Button";
 
-import { TStepsProps } from "../InfoAboutMeForm";
-
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { numbers } from "../../../core/constants/constants";
+import { TNubmer } from "../../../core/constants/constants.types";
+import { TStepsProps } from "../InfoAboutMeForm.types";
 
 import plus from "../../../assets/img/Plus.svg";
 import del from "../../../assets/img//Delete.svg";
 
 import styles from "../infoAboutMeForm.module.scss";
-import Button from "../../button/Button";
-import { setAddAdvantages, setDeleteAdvantages } from "../../../store/actions";
-import { numbers } from "../../../core/constants/constants";
-import { TNubmer } from "../../../core/constants/constants.types";
 
-let id = 1;
+const StepTwo: FC<TStepsProps> = ({ control, errors, setValue }) => {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "advantages",
+  });
 
-const StepTwo: FC<TStepsProps> = ({
-  control,
-  register,
-  errors,
-  setValue,
-  watch,
-}) => {
-  const dispatch = useAppDispatch();
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control,
-      name: "advantages",
-    }
-  );
-
-  // const watchRadioGroup = watch("radioGroup");
-  // const { advantages } = useAppSelector((state) => state.formReducer);
-
-  // const addAdvantages = () => {
-  //   dispatch(setAddAdvantages(`advantages-${id}`));
-  //   if (advantages.length >= 0) {
-  //     id += 1;
-  //   }
-  // };
-
-  // const deleteAdvatage = (name: string) => {
-  //   dispatch(setDeleteAdvantages(name));
-  // };
   return (
     <>
       <p className={styles.title__advantages}>Advantages</p>
@@ -58,16 +31,21 @@ const StepTwo: FC<TStepsProps> = ({
               required: true,
             }}
             name={`advantages.${i}.value`}
-            // key={field.id}
             defaultValue=""
             render={({ field: { onChange, value, ref } }) => (
               <Input
                 type={"text"}
                 placeholder={`fields-${i}-advantages`}
-                classInput={styles.signInForm__input}
+                classInput={styles.signInForm__input_advantages}
                 onChange={onChange}
                 value={value}
                 inputRef={ref}
+                error={
+                  errors.advantages &&
+                  errors.advantages[i] &&
+                  errors.advantages[i]?.value &&
+                  "Обязательное поле, должно состоять только из букв"
+                }
               />
             )}
           />
@@ -118,8 +96,7 @@ const StepTwo: FC<TStepsProps> = ({
                       }
                     }}
                     value={checkbox.num}
-                    checked={value.some(val => val === checkbox.num)}
-                    // value={value}
+                    checked={value.some((val) => val === checkbox.num)}
                     inputRef={ref}
                   />
                 )}
@@ -127,6 +104,7 @@ const StepTwo: FC<TStepsProps> = ({
               <p>{checkbox.num}</p>
             </div>
           ))}
+        <small className="input_error">{errors.checkbox?.message}</small>
       </div>
       <div className={styles.checkbox_group}>
         <p>Radio group</p>
@@ -145,7 +123,9 @@ const StepTwo: FC<TStepsProps> = ({
                     type={"radio"}
                     classInput={""}
                     onChange={() => {
-                      setValue("radioGroup", Number(radio.num));
+                      if (setValue) {
+                        setValue("radioGroup", Number(radio.num));
+                      }
                     }}
                     checked={value === radio.num}
                     value={value}
@@ -156,6 +136,7 @@ const StepTwo: FC<TStepsProps> = ({
               <p>{radio.num}</p>
             </div>
           ))}
+        <small className="input_error">{errors.radioGroup?.message}</small>
       </div>
     </>
   );
