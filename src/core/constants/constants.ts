@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { TNubmer, TLink, TSelectOption } from "./constants.types";
 
 export const EMAIL_REGEXP: RegExp =
