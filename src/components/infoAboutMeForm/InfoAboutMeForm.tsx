@@ -28,7 +28,7 @@ const InfoAboutMeForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { stepForm, selected } = useAppSelector((state) => state.otherReducer);
-  const [checkedSelect, setCheckedSelect] = useState(true);
+  const [checkedSelect, setCheckedSelect] = useState<boolean>(true);
   const {
     register,
     handleSubmit,

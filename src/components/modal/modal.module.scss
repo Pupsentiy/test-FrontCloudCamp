@@ -13,7 +13,7 @@
   transition: 0.5s;
   z-index: 10;
 
-  @media (max-width: 576px) {
+  @media (max-width: $breakpoint_sm) {
     max-width: 100vw;
     width: 100%;
   }
@@ -37,7 +37,7 @@
     }
 
     h1 {
-      @media (max-width: 576px) {
+      @media (max-width: $breakpoint_sm) {
         font-size: 18px;
       }
       @media (max-width: 375px) {
@@ -48,7 +48,7 @@
     .modal_status_img {
       margin-top: 50px;
       padding: 0 158px;
-      @media (max-width: 576px) {
+      @media (max-width: $breakpoint_sm) {
         padding: 0 80px;
       }
       @media (max-width: 375px) {

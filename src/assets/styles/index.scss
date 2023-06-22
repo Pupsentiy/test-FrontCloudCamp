@@ -19,7 +19,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  @media (max-width: 576px) {
+  @media (max-width: $breakpoint_sm) {
     height: 100%;
   }
 }

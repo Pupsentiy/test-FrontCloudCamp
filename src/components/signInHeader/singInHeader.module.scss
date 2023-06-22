@@ -3,7 +3,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
-  @media (max-width: 576px) {
+  @media (max-width: $breakpoint_sm) {
     flex-direction: column;
   }
   .signInHeader_wrapper_avatar {
@@ -20,7 +20,7 @@
   .signInHeader_owner_info {
     margin-left: 24px;
 
-    @media (max-width: 576px) {
+    @media (max-width: $breakpoint_sm) {
       margin-top: 20px;
       margin-left: 0;
     }

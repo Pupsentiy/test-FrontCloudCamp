@@ -5,7 +5,7 @@
   min-height: 700px;
   margin: 24px auto 0;
   padding: 24px;
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint_md) {
     width: 90%;
   }
 
