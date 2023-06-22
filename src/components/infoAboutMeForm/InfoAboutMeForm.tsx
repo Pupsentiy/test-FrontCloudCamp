@@ -1,15 +1,10 @@
-import { FC,  useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  useForm,
-  SubmitHandler,
-} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import {
-  infoAboutMeFormShema,
-} from "../../core/helpers/validation.helpers";
+import { infoAboutMeFormShema } from "../../core/helpers/validation.helpers";
 import { TInfoAboutMeForm } from "./InfoAboutMeForm.types";
 
 import Button from "../button/Button";
@@ -28,7 +23,7 @@ const InfoAboutMeForm: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { stepForm, selected } = useAppSelector((state) => state.otherReducer);
-  const [checkedSelect, setCheckedSelect] = useState<boolean>(true);
+  const [checkedSelect, setCheckedSelect] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -57,6 +52,7 @@ const InfoAboutMeForm: FC = () => {
     if (stepForm === 2) {
       return;
     }
+
     let res;
     switch (stepForm) {
       case 0:
@@ -70,7 +66,7 @@ const InfoAboutMeForm: FC = () => {
       default:
         break;
     }
-    if (res) {
+    if (res && checkedSelect && selected !== "Не выбрано") {
       dispatch(setChangeStep(stepForm + 1));
     }
   };

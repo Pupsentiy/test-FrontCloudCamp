@@ -24,7 +24,6 @@ export const myThunkActionCreator = (dataForm: TForm) => {
   return async (dispatch: Dispatch<TOtherTypeAction>) => {
     dispatch({ type: ActionTypes.FETCH_DATA });
     const [response] = await fetchPostForm(dataForm);
-    console.log(response, "asda");
     if ([response].length) {
       dispatch({ type: ActionTypes.FETCH_DATA_SUCCESS });
     } else {

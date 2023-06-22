@@ -19,7 +19,7 @@ const StepTwo: FC<TStepsProps> = ({ control, errors, setValue }) => {
     control,
     name: "advantages",
   });
-
+console.log(errors)
   return (
     <>
       <p className={styles.title__advantages}>Advantages</p>

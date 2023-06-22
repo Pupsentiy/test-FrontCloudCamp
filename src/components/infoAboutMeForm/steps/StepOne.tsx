@@ -4,6 +4,8 @@ import { Controller } from "react-hook-form";
 import Input from "../../input/Input";
 import Select from "../../select/Select";
 
+import { useAppSelector } from "../../../hooks/hooks";
+
 import { TStepsProps } from "../InfoAboutMeForm.types";
 
 import styles from "../infoAboutMeForm.module.scss";
@@ -14,6 +16,7 @@ const StepOne: FC<TStepsProps> = ({
   errors,
   checkedSelect,
 }) => {
+  const { selected } = useAppSelector((state) => state.otherReducer);
   return (
     <>
       <Controller
@@ -85,7 +88,7 @@ const StepOne: FC<TStepsProps> = ({
 
       <Fragment>
         <Select />
-        {!checkedSelect && (
+        {selected === "Не выбрано" && !checkedSelect && (
           <small className="input_error">Обязательное поле</small>
         )}
       </Fragment>
